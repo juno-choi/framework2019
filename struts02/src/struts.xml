@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<!-- page를 나누는 방법은 namespace를 주어 page를 나눌 수 있다. -->
+ <package name="pack01" namespace="/" extends="struts-default">
+ 	<action name="ex01" class="com.bit.action.Ex01Action">
+ 		<result name="success">/index.jsp</result>
+ 		<result name="error">/err.jsp</result>
+ 		<result name="input">/form.jsp</result>
+ 	</action>
+ 	
+ 	<action name="ex02" class="com.bit.action.Ex02Action">
+ 		<result name="success">/form.jsp</result>
+ 	</action>
+ 	<!-- interceptor에 params는 인자값을 받았을 때 인자값을 자동으로 set해주고 setAttribute까지 해주므로 result페이지에서는
+ 		getAttribute를 통해 얻어올 수 있다~ -->
+ 	<action name="ex03" class="com.bit.action.Ex03Action">
+ 		<interceptor-ref name="params"></interceptor-ref>
+ 		<result name="success">/result.jsp</result>
+ 	</action>
+ </package>
+ 
+ <package name="pack02" namespace="/next" extends="pack01">
+ <!-- action의 name이 상속받은 패키지와 겹치면 namespace가 다를경우 현재 패키지의 name의 action으로 오버라이딩되어 페이지가 출력된다 -->
+ 	<action name="ex01" class="com.bit.action.Ex04Action">
+ 		<result name="success" type="redirectAction">
+ 			<param name="id">admin</param>
+ 			<param name="pw">1234</param>
+ 			<param name="actionName">result</param>
+ 			
+ 		</result>
+ 	</action>
+ 	<action name="input" class="com.bit.action.InputAction">
+ 		<result name="success">/input.jsp</result>
+ 	</action>
+ 	<action name="result" class="com.bit.action.ResultAction">
+ 		<interceptor-ref name="params"></interceptor-ref>
+ 		<result name="input">/login.jsp</result>
+ 		<result name="success">/result.jsp</result>
+ 	</action>
+ </package>
+</struts>

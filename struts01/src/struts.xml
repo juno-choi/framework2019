@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+    <struts>
+    <!-- 패키지의 이름과 ex는 필수 조건이다 -->
+    	<package name="step1" extends="struts-default">
+    	<!-- action의 name은 주소값이다. test01이란 주소로 오게되면 action으로 가게되는거임 web servlet이랑 비슷 -->
+    		<action name="test01">
+    		<!-- result 안에 들어가는 jsp파일이 화면에 출력되어짐 -->
+    			<result>/index.jsp</result>
+    		</action>
+    	</package>
+    </struts>
